@@ -61,8 +61,9 @@ class ReDashboard extends React.Component<IProps, IReDashboard>{
     public getProfile() {
         this.props.setProfile()
             .then(() => {
-                console.log('done');
+                console.log('done xxxxx');
                 sm.connect();
+                console.log('done xxxxx2');
             });
         //        console.log('name from the store: ', this.props.name)
     }

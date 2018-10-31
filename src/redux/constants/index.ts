@@ -8,5 +8,6 @@ export * from './getMessages';
 export * from './handleConversations';
 export * from './updateConversation';
 export * from './language';
+export * from './logIn'
 // export SET_NAME;
 

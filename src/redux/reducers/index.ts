@@ -25,6 +25,8 @@ export interface IMyStore {
 declare const window :{__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ :typeof compose}
 const rootReducer = combineReducers<IMyStore>({setName, setProfile, selectConversation,
      getAvailableContacts, message, getMessages});
+     const  realCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 
-const create= window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ (applyMiddleware(thunk))(createStore);
+const create= realCompose (applyMiddleware(thunk))(createStore);
 export default create(rootReducer);
+// const create = createStore()

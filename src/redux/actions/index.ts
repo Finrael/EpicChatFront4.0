@@ -50,6 +50,7 @@ export const getAvailableContacts = () => {
         });
 console.log(response)
         const body:Ibody= await response.json();
+        console.log(body);
         const convID = body.contacts.map(({ contact: { _id, username, email }, conversationId }) => ({
             _id, username, email, conversationId
         }))

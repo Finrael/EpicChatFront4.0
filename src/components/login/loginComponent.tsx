@@ -37,27 +37,21 @@ class Login extends React.Component<{}, ILogin>{
         headers: { 'Content-Type': 'application/json' }
       });
     // debugger;
+    console.log('response', response)
     if (response.status !== 200) {return this.setState({unauthorized: true}) }
-    const body = await response.json();
+    // const body = await response.json();
     // console.log('this is the body',body)
     if (this.state.unauthorized===false){
       this.setState({logged:true});
     }
-    return body;
+    // return body;
   }
   public componentDidMount() {
     // this.callApi()
     //   .then(res => this.setState({ response: res.express }))
     //   .catch(err => console.log(err));
   }
- 
-  // public callApi = async () => {
-  //   const response = await fetch('/api/logIn');
-  //   const body = await response.json();
-  //   sessionStorage.setItem('jwtToken', body.password)
-  //   if (response.status !== 200) { throw Error(body.message); }
-  //   return body;
-  // };
+
   // function to stablish state.email
   public handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ email: event.target.value });
