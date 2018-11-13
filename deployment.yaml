@@ -1,0 +1,185 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: front-service-v3
+  labels:
+    app: front-service-v3
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: front-service-v3
+    service: front-service-v3
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-service-v3
+  labels:
+    app: front-service-v3
+spec:
+  selector:
+    matchLabels:
+      app: front-service-v3
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: front-service-v3
+        service: front-service-v3
+    spec:
+      containers:
+        - name: front-server-v3
+          image: front:v5
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mid-service-v3
+  labels:
+    app: mid-service-v3
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: mid-service-v3
+    service: mid-service-v3
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mid-service-v3
+  labels:
+    app: mid-service-v3
+    service: mid-service-v3
+spec:
+  selector:
+    matchLabels:
+      app: mid-service-v3
+      service: mid-service-v3
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mid-service-v3
+        service: mid-service-v3
+    spec:
+      containers:
+        - name: mongo-mid-server-v3
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+        - name: mid-server-v3
+          image: epicchatserver_middleserver:latest
+          ports:
+            - containerPort: 5000
+        
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service-v3
+  labels:
+    app: auth-service-v3
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5001
+    targetPort: 5001
+    protocol: TCP
+  selector:
+    app: auth-service-v3
+    service: auth-service-v3
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service-v3
+  labels:
+    app: auth-service-v3
+spec:
+  selector:
+    matchLabels:
+      app: auth-service-v3
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: auth-service-v3
+        service: auth-service-v3
+    spec:
+      containers:
+        - name: mongo-auth-server-v3
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+        - name: auth-server-v3
+          image: auth-service:v5
+          ports:
+            - containerPort: 5001
+        
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: noth-service-v3
+  labels:
+    app: noth-service-v3
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5002
+    targetPort: 5002
+    protocol: TCP
+  selector:
+    app: noth-service-v3
+    service: noth-service-v3
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noth-service-v3
+  labels:
+    app: noth-service-v3
+    service: noth-service-v3
+spec:
+  selector:
+    matchLabels:
+      app: noth-service-v3
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: noth-service-v3
+    spec:
+      containers:
+        - name: mongo-noth-server-v3
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+        - name: noth-server-v3
+          image: noth-service:v5
+          ports:
+            - containerPort: 5002
+        
+

@@ -1,0 +1,12 @@
+ apiVersion: v1
+ kind: Pod
+ metadata:
+   name: epic-front-pod
+   labels:
+     app: epic-front-pod
+ spec:
+   containers:
+     - name: epic-front-server
+       image: front-service:v1
+       ports:
+         - containerPort: 80
