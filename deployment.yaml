@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
         - name: front-server-v3
-          image: front:v5
+          image: front:v10
           ports:
             - containerPort: 80
 
@@ -84,7 +84,7 @@ spec:
           ports:
             - containerPort: 27017
         - name: mid-server-v3
-          image: epicchatserver_middleserver:latest
+          image: mid-service:v6
           ports:
             - containerPort: 5000
         
@@ -161,7 +161,6 @@ metadata:
   name: noth-service-v3
   labels:
     app: noth-service-v3
-    service: noth-service-v3
 spec:
   selector:
     matchLabels:
@@ -171,6 +170,7 @@ spec:
     metadata:
       labels:
         app: noth-service-v3
+        service: noth-service-v3
     spec:
       containers:
         - name: mongo-noth-server-v3
